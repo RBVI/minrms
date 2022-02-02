@@ -1,12 +1,15 @@
 Installation instructions for MINRMS
 ==========================
 
-This file explains how to install **minrms**.
+This file explains how to compile and install **minrms**
+and it's companion software tools.
+
 
 ## Outline
 
-1) Install MINRMS
+1) Compile MINRMS
 2) Windows and MacOS specific instructions
+
 
 ## Prerequisites:
 
@@ -21,15 +24,14 @@ Before you begin, you will need:
   (Usually "git" can be installed using your OS' package management
   installer tool, such as "apt", "yum", or "brew", etc...)
 
-## STEP 1: Install the MINRMS software tools
 
-### Download the MINRMS code
+## Download the MINRMS code
 
 ```
 git clone https://github.com/jewettaij/minrms ~/minrms
 ```
 
-### Compile the MINRMS code
+## Compile the MINRMS code
 
 ```
 cd ~/minrms
@@ -37,7 +39,7 @@ cd ~/minrms
 
 The next step depends on which compiler you are using.
 
-#### If you are using the GCC compiler, enter:
+### If you are using the GCC compiler, enter:
 ```
 gcc --version
 ```
@@ -50,12 +52,12 @@ source setup_gcc.sh
 ```
 ...and skip th the next section.
 
-#### If you are using the CLANG compiler, enter this instead:
+### If you are using the CLANG compiler, enter this instead:
 ```
 source setup_clang.sh
 ```
 
-### Now compile the MINRMS software using:
+## Now compile the MINRMS software using:
 
 ```
 make clean
@@ -74,66 +76,24 @@ echo "export PATH=\"$PATH:$HOME/bin\" >> ~/.bashrc
 
 Now copy these files to that ~/bin directory:
 ```
-cp -f bin/filter_mrc/filter_mrc ~/bin/
-cp -f bin/sum_voxels/sum_voxels ~/bin/
-cp -r bin/combine_mrc/combine_mrc ~/bin/
-cp -r bin/voxelize_mesh/voxelize_mesh.py ~/bin/
-```
-
-Then log out and log in again for the changes to take effect.
-
-
-
-## STEP 2: Install the python modules that MINRMS needs:
-
-#### Optional, but recommended:
-
-First setup a virtual environment where you can run the MINRMS tools.
-```
-python3 -m venv ~/bin/venv_minrms    #(use "python" if "python3" is not found)
-deactivate # Don't worry if this step prints an error message.
-source ~/bin/venv_minrms/bin/activate
-```
-
-Then run these commands:
-*(Note: If it complains "pip3: command not found",
-then try using "pip" instead.)*
-
-```
-pip3 install numpy       # (Use "pip" if "pip3" fails.)
-pip3 install mrcfile
-pip3 install pyvista
-pip3 install matplotlib  # optional but recommended
-pip3 install skimage     # optional but recommended
-pip3 install scipy       # optional but recommended
-```
-
-
-
-
-Installation is complete.
-
-
-
-### *If you created a virtual environment*
-
-If you followed the suggestion above and created a virtual environment
-*(using "python -m venv ~/bin/venv_minrms")*, then you must do this
-before using the MINRMS tools:  Start a new terminal and enter:
-```
-source ~/bin/venv_minrms/bin/activate
-```
-You must do this every time before you run the MINRMS software.
-(Otherwise, the "*voxelize_mesh.py*" program will not work.)
-Alternatively, you can add that command to your ~/.bashrc file this way:
-```
-echo "source ~/bin/venv_minrms/bin/activate" >> ~/.bashrc
+cp -f bin/minrms/minrms ~/bin/
+cp -f bin/msf2stat3d/msf2stat3d ~/bin/
+cp -f bin/msf_compare/msf_compare ~/bin/
+cp -f bin/msf2sequence/msf2sequence ~/bin/
+cp -f bin/pdb2sequence/pdb2sequence ~/bin/
+cp -f bin/pdb_select/pdb_select ~/bin/
+cp -f bin/rotate_pdb/rotate_pdb ~/bin/
+cp -f bin/align2msf/align2msf.py ~/bin/
 ```
 
 
 ## Apple MacOS instructions
+
 If you are using an apple computer, you will need to install a C++11
-compatible compiler.
+compatible compiler.  As of 2022-2-02, this is included with Xcode.
+It can also be installed using the excellent Homebrew package
+management system.
+
 
 ## Windows instructions
 
@@ -162,3 +122,5 @@ where the linux operating system is stored.  Software (like *minrms*)
 that you download and install there can access the files in that filesystem.
 So you may need to copy your PDB files and other files to this fileystem
 beforehand.
+
+These instructions were written on 2022-2-02.
