@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-test_simple() {
+test_align2msf() {
     cd tests/
     # commenting out:
     # (we already downloaded these files in an earlier test)
@@ -13,7 +13,7 @@ test_simple() {
     mv myoglobin.pdb 1a6m.pdb 
     python3 ../bin/align2msf/align2msf.py align_server_output/1a6m+4hhbA.txt 1a6m.pdb 4hhb.pdb > align2msf_output.msf
     FILE_SIZE=`wc -c align2msf_output.msf | awk '{print $1}'`
-    assertTrue "align2msf.py failed" "[ -eq $FILE_SIZE 1578 ]"
+    assertTrue "align2msf.py failed" "[ $FILE_SIZE -eq 1578 ]"
     #rm -f align2msf_output.msf
   cd ../
 }

@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/jewettaij/minrms.svg?style=svg)](https://circleci.com/gh/jewettaij/minrms)
+[![CircleCI](https://img.shields.io/circleci/build/github/jewettaij/minrms/main)](https://circleci.com/gh/jewettaij/minrms)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/jewettaij/minrms)]()
 [![Website](https://img.shields.io/website?down_color=orange&down_message=moltemplate.org%20offline&up_color=green&up_message=online&url=https%3A%2F%2Fwww.cgl.ucsf.edu%2FResearch%2Fminrms)](http://www.cgl.ucsf.edu/Research/minrms)
 

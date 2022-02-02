@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-test_simple() {
+test_typical_usage() {
     cd tests/
     wget http://www.rcsb.org/pdb/files/4hhb.pdb
     wget http://www.rcsb.org/pdb/files/1a6m.pdb
