@@ -1,0 +1,10 @@
+aligment betweeen "resemblesZ.pdb" and "resemblesDiagonal.pdb".
+This alignment aligns the straight line of the of the diagonal
+structure perpendicular to the diagonal portion of the Z structure
+(It's like superimposing \ onto Z.  The result looks like an
+ hourglass, or a Roman X -with bar above it and below it.)
+..
+//
+
+resemblesZ.pdb         GASC.VTI
+resemblesDiagonal.pdb  P...M..D

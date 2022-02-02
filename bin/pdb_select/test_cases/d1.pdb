@@ -1,0 +1,27 @@
+ATOM      1  C   ALA A   1       0.0     0.0     0.0
+ATOM      2  CA  ALA A   1       0.5     0.0     0.0
+ATOM      5  C   TRP A   2       1.0     0.0     0.0
+ATOM      6  CA  TRP A   2       1.5     0.0     0.0
+ATOM      7  C   GLY A   3       2.0     0.0     0.0
+ATOM      8  CA  GLY A   3       2.0     0.5     0.0
+ATOM      9  C   MET A   4       2.0     1.0     0.0
+ATOM     10  CA  MET A   4       2.0     1.5     0.0
+ATOM     11  C   ALA A   5       2.0     2.0     0.0
+ATOM     12  CA  ALA A   5       2.0     2.0     0.5
+ATOM     13  C   TRP A   6       2.0     2.0     1.0
+ATOM     14  CA  TRP A   6       2.0     2.0     1.5
+ATOM     15  C   GLY A   7       2.0     2.0     2.0
+ATOM     16  CA  GLY A   7       2.5     2.0     2.0
+TER
+ATOM     17  C   MET B   2       3.0     2.0     2.0
+ATOM     18  CA  MET B   2       3.5     2.0     2.0
+ATOM     19  C   ALA B   3       4.0     2.0     2.0
+ATOM     20  CA  ALA B   3       4.0     2.5     2.0
+ATOM     21  C   TRP B   4       4.0     3.0     2.0
+ATOM     22  CA  TRP B   4       4.0     3.5     2.0
+ATOM     23  C   GLY B   5       4.0     4.0     2.0
+ATOM     24  CA  GLY B   5       4.0     4.0     2.5
+ATOM     25  C   MET B   6       4.0     4.0     3.0
+ATOM     26  CA  MET B   6       4.0     4.0     3.5
+ATOM     27  C   ALA B   7       4.0     4.0     4.0
+ATOM     28  CA  ALA B   7       4.5     4.0     4.0

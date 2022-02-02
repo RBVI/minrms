@@ -1,0 +1,12 @@
+test msf-file for msf-compare
+..
+
+Name: 2lzm  Len: 164   Check: 0   Weight: 1.00
+Name: 1lyz  Len: 129   Check: 0   Weight: 1.00
+//
+      
+A  ABCDEFG
+B  ....AB.
+
+A  HI.....
+B  CDEFGHI

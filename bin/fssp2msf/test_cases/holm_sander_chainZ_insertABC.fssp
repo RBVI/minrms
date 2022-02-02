@@ -1,0 +1,154 @@
+From MAILER-DAEMON Mon Jul 19 20:08:08 1999
+Date: Mon, 19 Jul 1999 20:08:08 -0700 (PDT)
+From: Mail System Internal Data <MAILER-DAEMON@cgl.ucsf.edu>
+Subject: DON'T DELETE THIS MESSAGE -- FOLDER INTERNAL DATA
+X-IMAP: 0932440088 0000000000
+Status: RO
+
+This text is part of the internal format of your mail folder, and is not
+a real message.  It is created automatically by the mail system software.
+If deleted, important folder data will be lost, and it will be re-created
+with the data reset to initial values.
+
+From jewett@cgl.ucsf.edu Mon Jul 19 20:06:05 1999 -0700
+Status: R
+X-Status: 
+X-Keywords:
+Received: from cgl.ucsf.EDU (cgl.ucsf.edu [128.218.27.20]) by socrates.cgl.ucsf.EDU (8.9.3/GSC4.26) with ESMTP
+	id UAA519367 for <jewett@socrates.cgl.ucsf.EDU>; Mon, 19 Jul 1999 20:06:05 -0700 (PDT)
+Received: from alpha1.ebi.ac.uk (root@alpha1.ebi.ac.uk [193.62.196.122]) by cgl.ucsf.EDU (8.8.7/GSC4.26) with ESMTP
+	id UAA15583 for <jewett@cgl.ucsf.edu>; Mon, 19 Jul 1999 20:06:03 -0700 (PDT)
+Received: from columba.ebi.ac.uk (columba.ebi.ac.uk [193.62.196.154])
+	by alpha1.ebi.ac.uk (8.8.7/8.8.7) with ESMTP id EAA27333
+	for <jewett@cgl.ucsf.edu>; Tue, 20 Jul 1999 04:06:01 +0100 (BST)
+Received: (from dali@localhost)
+	by columba.ebi.ac.uk (8.8.6/8.8.7) id EAA14806
+	for jewett@cgl.ucsf.edu; Tue, 20 Jul 1999 04:06:01 +0100 (BST)
+Date: Tue, 20 Jul 1999 04:06:01 +0100 (BST)
+From: Dali Server <dali@ebi.ac.uk>
+Message-Id: <199907200306.EAA14806@columba.ebi.ac.uk>
+To: jewett@cgl.ucsf.EDU
+Subject: Dali-Server
+
+
+
+FSSP      FAMILIES OF STRUCTURALLY SIMILAR PROTEINS, VERSION 1.0 (Apr 1 1995)
+CREATED   Tue Jul 20 04:05:58 BST 1999 for dali on croma
+METHOD    Dali ver. 2.0: Holm, L., Sander, C. (1993) J.Mol.Biol. 233,123-138
+DATABASE  1 protein chains
+PDBID     9381-Z
+HEADER    
+COMPND    
+SOURCE    
+AUTHOR    
+SEQLENGTH    41
+NALIGN        2
+WARNING   pairs with Z<2.0 are structurally dissimilar
+
+## SUMMARY: PDB/chain identifiers and structural alignment statistics
+  NR. STRID1 STRID2  Z   RMSD LALI LSEQ2 %IDE REVERS PERMUT NFRAG TOPO PROTEIN
+   1: 9381-Z mol2-Z  6.2  0.0   41    41  100      0      0     1 S                                                           
+   2: 9381-Z 9381-Z  6.2  0.0   41    41  100      0      0     1 S                                                           
+
+## ALIGNMENTS     1 -    2
+SeqNo PDBNo AA STRUCTURE BP1 BP2  ACC OCC .  .                                                                          
+   1   27AZ A              0   0    0   2 A  A                                                                                     
+   2   27BZ E        +     0   0    0   2 E  E                                                                                     
+   3   27CZ D  S    S+     0   0    0   2 Ds Ds                                                                                    
+   4   31 Z L  S    S-     0   0    0   2 Ls Ls                                                                                    
+   5   32 Z E  S    S-     0   0    0   2 Es Es                                                                                    
+   6   33 Z R  S    S-     0   0    0   2 Rs Rs                                                                                    
+   7   34 Z V  S    S+     0   0    0   2 Vs Vs                                                                                    
+   8   35 Z F        -     0   0    0   2 F  F                                                                                     
+   9   36 Z I        -     0   0    0   2 I  I                                                                                     
+  10   37 Z P    >   -     0   0    0   2 P  P                                                                                     
+  11   38 Z H  T 3> S+     0   0    0   2 Ht Ht                                                                                    
+  12   39 Z G  H 3> S+     0   0    0   2 Gh Gh                                                                                    
+  13   40 Z L  H <> S+     0   0    0   2 Lh Lh                                                                                    
+  14   41 Z I  H >> S+     0   0    0   2 Ih Ih                                                                                    
+  15   42 Z M  H 3X S+     0   0    0   2 Mh Mh                                                                                    
+  16   43 Z D  H 3X S+     0   0    0   2 Dh Dh                                                                                    
+  17   44 Z R  H <X S+     0   0    0   2 Rh Rh                                                                                    
+  18   45 Z T  H  X S+     0   0    0   2 Th Th                                                                                    
+  19   46 Z E  H  X S+     0   0    0   2 Eh Eh                                                                                    
+  20   47 Z R  H >X S+     0   0    0   2 Rh Rh                                                                                    
+  21   48 Z L  H 3X S+     0   0    0   2 Lh Lh                                                                                    
+  22   49 Z A  H 3X S+     0   0    0   2 Ah Ah                                                                                    
+  23   50 Z R  H <X S+     0   0    0   2 Rh Rh                                                                                    
+  24   51 Z D  H >X S+     0   0    0   2 Dh Dh                                                                                    
+  25   52 Z V  H >X S+     0   0    0   2 Vh Vh                                                                                    
+  26   53 Z M  H 3X S+     0   0    0   2 Mh Mh                                                                                    
+  27   54 Z K  H << S+     0   0    0   2 Kh Kh                                                                                    
+  28   55 Z E  H << S+     0   0    0   2 Eh Eh                                                                                    
+  29   56 Z M  H >< S+     0   0    0   2 Mh Mh                                                                                    
+  30   57 Z G  T 3<  -     0   0    0   2 Gt Gt                                                                                    
+  31   58 Z G  T 3  S+     0   0    0   2 Gt Gt                                                                                    
+  32   59 Z H  S <  S-     0   0    0   2 Hs Hs                                                                                    
+  33   60 Z H        -     0   0    0   2 H  H                                                                                     
+  34   61 Z I        -     0   0    0   2 I  I                                                                                     
+  35   62 Z V        -     0   0    0   2 V  V                                                                                     
+  36   63 Z A        -     0   0    0   2 A  A                                                                                     
+  37   64 Z L        -     0   0    0   2 L  L                                                                                     
+  38   65 Z C        -     0   0    0   2 C  C                                                                                     
+  39   66 Z V        -     0   0    0   2 V  V                                                                                     
+  40   67 Z L              0   0    0   2 L  L                                                                                     
+  41   68 Z K              0   0    0   2 K  K                                                                                     
+
+## EQUIVALENCES: ranges of aligned residues
+  NR. STRID1 STRID2      STRID1 <=> STRID2                       STRID1 <=> STRID2
+   1: 9381-Z mol2-Z     1 -  41 <=>    1 -  41   (ALA Z 27A - LYS Z  68 <=> ALA Z 27A - LYS Z  68)                          
+   2: 9381-Z 9381-Z     1 -  41 <=>    1 -  41   (ALA Z 27A - LYS Z  68 <=> ALA Z 27A - LYS Z  68)                          
+
+## MATRICES: UX+T is the least-squares superimposition of STRID2 (X) onto STRID1
+  NR. STRID1 STRID2           U(.,1)    U(.,2)    U(.,3)             T(.)
+   1: 9381-Z mol2-Z  U(1,.)   1.000000  0.000000  0.000000            0.000000   
+   1: 9381-Z mol2-Z  U(2,.)   0.000000  1.000000  0.000000            0.000000   
+   1: 9381-Z mol2-Z  U(3,.)   0.000000  0.000000  1.000000            0.000000   
+   2: 9381-Z 9381-Z  U(1,.)   1.000000  0.000000  0.000000            0.000000   
+   2: 9381-Z 9381-Z  U(2,.)   0.000000  1.000000  0.000000            0.000000   
+   2: 9381-Z 9381-Z  U(3,.)   0.000000  0.000000  1.000000            0.000000   
+
+## FOOTER
+References:	L. Holm and C. Sander (1996) Mapping the protein universe.  Science 273:595-602.
+
+Parameters	elastic similarity score, threshold 0.20; sequential alignment
+
+The following notation is used for data columns:
+STRID1/STRID2	PDB identifiers of search structure and aligned structure with 
+		chain identifier                                  
+Z 		Z-score, i.e., strength of structural similarity in standard 
+		deviations above expexted.  The matched structures are sorted 
+		by Z-score.  Only matches above a threshold of Z=2 are reported.
+RMSD 		positional root mean square deviation of superimposed CA atoms 
+		in Angstroms
+LALI 		total number of equivalenced residues                          
+LSEQ2 		length of the entire chain of the equivalenced structure
+%IDE 		percentage of sequence identity over equivalenced positions
+REVERS	 	number of fragments matching in reversed chain direction
+PERMUT	 	number of topological permutations (loop reconnections between 
+		query and matched structure)                           
+NFRAG 		total number of equivalenced fragments
+TOPO 		'S' sequential connectivity of equivalenced fragments
+		'N' non-sequential alignment                                    
+PROTEIN 	COMPND record from the PDB file of the aligned structure     
+SeqNo, PDBNo, AA, STRUCTURE, BP1, BP2, ACC 
+		sequential and PDB residue numbers, amino acid (lower case = 
+		Cys),secondary structure, solvent exposure as in DSSP (Kabsch 
+		and Sander, Biopolymers 22, 2577-2637, 1983). The alignments 
+		block shows the amino acid sequence and DSSP code (in lower 
+		case) of the equivalenced fragments.          
+OCC 		number of equivalences spanning this position             
+STRID1 <=> STRID2
+	 	sequential residue numbers of equivalenced fragments (PDB 
+		residue numbers in parentheses); any topological permutations 
+		and matches in reverse chain direction are flagged
+
+e-mail		Holm@embl-ebi.ac.uk (Internet)
+anonymous ftp	ftp://ftp.embl-ebi.ac.uk/pub/databases/fssp
+WWW URL		http://www2.embl-ebi.ac.uk/dali/fssp/
+
+Availability:	Free academic use.  No commercial use.
+		No incorporation into other databases.
+
+//
+

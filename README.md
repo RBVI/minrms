@@ -11,7 +11,7 @@ minrms
 Similarity in the amino acid sequence of proteins can be difficult
 to detect if they are evolutionarily distant.
 However similarity in the 3D structure of proteins often persists long
-[after the sequences have diverged](https://doi.org/10.1006/jmbi.1993.1489)
+[after the sequences have diverged.](https://doi.org/10.1006/jmbi.1993.1489)
 It is possible to detect evolutionary similarity between proteins from
 distantly related organisms by examining their 3D structure.
 
@@ -81,8 +81,8 @@ The main **minrms** program is written in C++.
 A C++11 compliant compiler is required to build the executable
 (such ass GCC 4.9+ or CLANG 6+ or later).
 
-*(The [bin/](./bin) subdirectory also includes some additional programs
-which are documented [here](./doc).  These programs are probably
+*(The [bin/](./bin/) subdirectory also includes some additional programs
+which are documented [here](./doc/).  These programs are probably
 not very relevant for most users and can be ignored.)*
 
 
@@ -104,8 +104,8 @@ If you find this program useful, please cite:
 
 RMSD is a simple metric which is easy to interpret.  However it does not
 tell us how many amino acids the two proteins have in common.
-*(It's always possible to find alignments with lower RMSD
-by discarding the most distant pair of residues in the alignment.)*
+*(It's always possible to find an alignment with lower RMSD
+by discarding the most distant pair of residues in an existing alignment.)*
 Hence MINRMS will generate alignments of every possible size
 and allow the user to choose between them.
 This can be done using using Levitt and Gerstein's

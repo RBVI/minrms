@@ -1,0 +1,139 @@
+in documentation:
+Mention to Elaine Meng the following:
+
+The -fm 4 -r -ir -hs options are all on by default
+and are not necessary to include in your examples
+(unless you want to, to illustrate what each one means.)
+
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+Remaining errors:
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+when using:
+-atoms-used atoms_used.txt
+
+along with the "atoms_used.txt" file containing:
+"N"
+" CA"
+I get an Abort().
+
+When the "atoms_used.txt" file contains:
+""
+" N"
+" CA"
+I get an assertion fail in or_gen.cc
+-------------------------------------------------
+when using:
+-sa n,35
+I got the message:
+
+A new best alignment was found, orientation #0
+with n = 0 and RMSD = nan;   orientations since last update: 0
+
+Process 81356 (minrms) stopped on signal SIGINT: Interrupt (default) at [minrms::DynNW::Solve(const minrms::LinearMolecule&,const minrms::LinearMolecule&,minrms::PairwiseAlignment&,bool):379 ,0x1005aae0]
+
+      (I don't think I will try to fix
+       this bug before the alpha release.)
+-------------------------------------------------
+When running minrms v0.99 on pdb files that have
+chains scrambled so that part of one chain
+appears inside another, minrms just acts weird
+without printing an error message.
+
+-------------------------------------------------
+-------------------------------------------------
+(not tested) fixed errors:
+-------------------------------------------------
+-------------------------------------------------
+when using: ?
+I got log(Prob(S_str,N)) values that were "1" when Prob was very very small.
+So, my Levitt&Gerstein numerical approximations were not kicking in in
+the right place.
+
+<<<<<<<<<I think I fixed this>>>>>>>>>>
+<<<<<<<<<To check: make sure the log(P_str) values differ between this
+<<<<<<<<<          version and earlier versions, by about of
+<<<<<<<<<          +/- 0.0001 (absolute, not fraction)
+<<<<<<<<<          for alignments with high similarity (Prob < 10^-7)
+.
+
+.
+
+.
+
+.
+
+.
+-------------------------------------------------
+-------------------------------------------------
+(tested) fixed/eradicated errors:
+-------------------------------------------------
+-------------------------------------------------
+when using:
+ ~/socrates/src/bin/minrms/minrms -of 3.0,0.5 1.pdb 2.pdb
+I got the output:
+Assertion failed in file: orientation_filter.cc, line: 19
+Abort
+<<<<<<<<<I think I fixed this>>>>>>>>>>
+CONFIRMED
+------------------------------------------------
+When using:
+~/socrates/src/bin/minrms/minrms -HS 1.pdb 2.pdb
+I got an error.
+<<<<<<<<<I think I fixed this>>>>>>>>>>
+CONFIRMED
+-------------------------------------------------
+when using: ?
+I got no separation between the 2nd and 3rd collumns in the align_chimera.plot
+file.
+<<<<<<<<<I think I fixed this>>>>>>>>>>
+CONFIRMED
+-------------------------------------------------
+when using: ?
+The "align_chimera.info" file was instead named "_chimera.info".
+<<<<<<<<<I think I fixed this>>>>>>>>>>
+CONFIRMED
+-------------------------------------------------
+when using: pdb files with out of order residue numbers or
+            residues with weird insert codes (some with ' ', and some with 'A')
+            atoms with weird insert codes (some with ' ', and some with 'A')
+  minrms would read in the wrong residues or atoms.
+<<<<<<<<<I think I fixed this>>>>>>>>>>
+CONFIRMED
+-------------------------------------------------
+when using: ?
+ ~/socrates/src/bin/minrms/minrms 1.pdb 2.pdb
+The time-prediction messages are not correct.
+55 updates for orientation 1  est. time left: 0 min.
+21 updates for orientation 2  est. time left: 0 min.
+26 updates for orientation 3  est. time left: 0 min.
+1 updates for orientation 5  est. time left: 0 min.
+15 updates for orientation 6  est. time left: 0 min.
+42 updates for orientation 8  est. time left: 0 min.
+35 updates for orientation 9  est. time left: 0 min.
+25 updates for orientation 10  est. time left: 0.833333 min.
+<<<<<<<<<I think I fixed this>>>>>>>>>>
+CONFIRMED
+
+-------------------------------------------------
+"-IR" flag doesn't work.
+<<<<<<<<<I think I fixed this>>>>>>>>>>
+CONFIRMED
+
+-------------------------------------------------
+when using:
+  ~/socrates/src/bin/minrms/minrms -max-dist 2.0 1.pdb 2.pdb
+it ignored the max-dist constraint and went on calculating through
+the entire range of n.
+(-max-rmsd works, -minN and -maxN appear to work in the simple case,
+ -FM works, -R works)
+<<<<<<<<<I think I fixed this>>>>>>>>>>
+CONFIRMED
+
+
+
+
+

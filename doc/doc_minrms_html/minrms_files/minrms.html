@@ -1,0 +1,591 @@
+
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>MinRMS</title>
+</head>
+<body>
+<h4>NAME</h4>
+<h3>MinRMS</h3>
+
+<a name="quick">
+<h4>SYNOPSIS</h4></a>
+<h3><b>minrms</b> <i>[options] pdb1[,filters] pdb2[,filters]</i></h3>
+
+<h4>DESCRIPTION</h4>
+<p>
+<b>MinRMS</b> generates a series of structural alignments (superpositions)
+of the proteins in the input PDB files <i>pdb1</i> and <i>pdb2</i>.
+The names or pathnames supplied for <i>pdb1</i> and <i>pdb2</i>
+<b>must not contain spaces</b>.  If they contain spaces, it will 
+not be possible to view the resulting alignment files with Chimera.
+The <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#filters"><i>filters</i></a> allow
+specification of subsets of the input structures.
+Many <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#options"><i>options</i></a> are described below. 
+</p><p>
+In <a href="http://www.cgl.ucsf.edu/chimera/" target="_blank">Chimera</a>,
+<a href="http://www.cgl.ucsf.edu/chimera/docs/ContributedSoftware/minrmsplot/minrmsplot.html" target="_blank"><b>Minrms Plot</b></a>
+can be used to display and analyze the results from <b>MinRMS</b>.
+</p><p>
+<b>MinRMS</b> is a stand-alone, nongraphical program that is
+run from the system command line. 
+<b>MinRMS</b> is not included with Chimera, but is
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/index.html" target="_blank">available</a> 
+for download in source code form.
+</p><p>
+<b>QUICK START TIPS</b>:  A beginning user should scan the
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#method">METHOD</a> and
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#display">DISPLAY</a>
+sections, then look over the <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#examples">EXAMPLES</a>,
+particularly the first, and the
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#options">OPTIONS</a> used therein.
+</p>
+
+<hr>
+<a name="method">
+<h4>METHOD</h4></a>
+A brief outline of the method follows; please consult Jewett <i>et al.</i>
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#refs">(1,2)</a> for a more detailed description.
+The user specifies the fragment length <i>L</i> to be
+used for generating superpositions.
+All fragments of <i>L</i> contiguous residues in <i>pdb1</i>
+are superimposed on all fragments of <i>L</i> contiguous residues
+in <i>pdb2</i> <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#refs">(3)</a>.
+The default behavior is to use one point per residue, the atom named CA.
+This results in a large set of superpositions, or structural alignments.
+<p>
+For each superposition, a list of sets of matched residues is prepared.  The
+list has <i>N</i> entries, where <i>N</i> is the smaller of the number of
+residues in <i>pdb1</i> and the number of residues in <i>pdb2</i>, both
+subject to any command-line <i>filters</i> and
+excluding HETATM records and residues that do not have an atom named CA.
+The <i>n</i>th item on the list
+contains the <i>n</i> residue pairings (<i>pdb1-pdb2</i>) that have the lowest
+root-mean-square distance (RMSD) of any set of
+<i>n</i> residue pairings <b>in that particular superposition</b>.
+This is determined by a dynamic programming algorithm which takes
+chain directionality into account and allows any number of gaps.
+Circular permutations (wraparound matchings) are not allowed.
+</p>
+<p>
+The next stage is comparison among superpositions.  Another list
+with <i>N</i> entries is constructed, where the <i>n</i>th item on the list
+contains the <i>n</i> residue pairings (<i>pdb1-pdb2</i>) that have the lowest
+RMSD of any set of <i>n</i> residue pairings <b>in any of the superpositions
+generated</b> and a reference to the associated superposition.
+In general, the information in this "lowest-RMSD list"
+is written out into files interpretable by Chimera:
+<b>align_chimera.info</b>,
+<b>align_chimera.plot</b>,
+and several sequence alignment files in
+MSF format, by default named <b>align2.msf</b>...<b>align<i>N</i>.msf</b>
+(or some subset of these, designated by cutoff options).
+Alignments of one residue pair would be meaningless and are not included.
+</p>
+<p>
+The <b>MinRMS</b> program is primarily intended for detailed
+comparison of proteins of known or suspected similarity.
+It is not well-suited, nor would it be computationally feasible for
+most users, to search structural databases or perform
+all pairwise comparisons within a large set of structures.
+</p>
+<hr>
+
+<a name="display">
+<h4>DISPLAY</h4></a>
+<p>
+The <i>n</i>th entry of the "lowest-RMSD list" consists of a structural
+alignment and the <i>n</i> residue pairings within it used to calculate
+the RMSD.  Each list item can be expressed as a sequence alignment in
+MSF format (file <b>align<i>n</i>.msf</b>);
+the corresponding rotation/translation information is included in the comments.
+The <i>n</i> residue pairings are aligned in sequence within the MSF file.  
+Other residues are treated as insertions. 
+</p><p>
+In Chimera,
+the results from <b>MinRMS</b> can be viewed and analyzed using
+<a href="http://www.cgl.ucsf.edu/chimera/docs/ContributedSoftware/minrmsplot/minrmsplot.html" target="_blank"><b>Minrms Plot</b></a>.
+This tool graphs the numerical results, shows the structural alignments, 
+and calls <a href="http://www.cgl.ucsf.edu/chimera/docs/ContributedSoftware/multalignviewer/framemav.html" target="_blank"><b>Multalign
+Viewer</b></a> to show the corresponding sequence alignments.
+</p>
+<hr>
+
+<a name="filters">
+<h4>FILTERS</h4></a>
+<p>
+If only a subset of the residues in a PDB file is to be used
+for generating superpositions, this can be indicated by
+filters denoting the residues and chains of interest.
+Filters should immediately follow the name of the PDB file and a comma
+(no space) and take the general form:
+</p><blockquote><tt>
+<i>start</i>-<i>end</i>.<i>chain</i><br>
+or<br>
+<i>start</i>-<i>end</i>.<i>chain</i>,<i>start</i>-<i>end</i>.<i>chain</i><br>
+(<i>etc.</i> for multiple segments)
+</tt></blockquote>
+where <i>start</i> and <i>end</i> are residue sequence numbers which
+may include an insertion code (<i>e.g.</i>, <b>100</b> or <b>100A</b>)
+and <i>chain</i> is a chain identifier such as <b>A</b>.
+The dashes and periods are to be taken literally.  Wild cards are
+permitted: if <i>start</i> is <b>*</b>, the first residue
+is used; if <i>end</i> is <b>*</b>, the last residue
+is used; if <i>chain</i> is <b>*</b>, all chains are used.  Omissions
+are also permitted:  if only one residue number is given, it is used
+as both <i>start</i> and <i>end</i> for that segment; if <i>start-end</i>
+is omitted or replaced with <b>*</b>, all residues are used; if <i>.chain</i>
+is omitted (or if <i>chain</i> is replaced with <b>*</b>, as mentioned
+above), all chains are used.  Finally, <i>chain</i> may be a range
+such as <b>A-C</b>.  If the command contains <b>*</b> and is typed in from
+the shell rather than included in a <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#options">configuration file</a>,
+the argument should be enclosed by quote marks <b>" "</b>.
+Capitalization is important for <i>chain</i> and insertion code.
+See the first and third <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#examples">examples</a>.
+<p></p>
+<p>
+Residues with ATOM records included in the PDB files but excluded by the
+filters will still appear in the output MSF files and
+the Chimera display; if this is not desired,
+they should be removed from the input PDB files.
+Residues present only as HETATM records in the PDB file will
+not appear in the MSF file, although they will be displayed in Chimera.
+In general, solvent, ion, and other molecules that
+are not peptides or nucleotides are present as HETATM records.
+</p>
+<hr>
+
+<a name="options">
+<h4>OPTIONS</h4></a>
+<blockquote>
+<tt><b>-cfg</b> <i>config_file</i></tt>
+<br>Rather than being typed out on the command line, <b>MinRMS</b>
+arguments including <tt><i>pdb1[,filters] pdb2[,filters]</i></tt>
+can be entered into a configuration file <i>config_file</i>.
+The options within do not have to be on a single line;
+"\" can be used to indicate line continuation
+(as in the <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#examples">examples</a>).  Text following "#"
+in any line is ignored, allowing comments to be included.
+Configuration files can be combined with any number of
+options typed on the command line, as long as the two PDB files are
+specified last.  The <b>-cfg</b> flag can be used more than once,
+and configuration files can invoke other configuration files.
+If arguments conflict (for example, if both <b>-hs</b> and <b>-HS</b>
+are included), arguments appearing later in the list override arguments
+earlier in the list.  If a MINRMS_SETTINGS_FILE environment variable has
+been set, the arguments in this configuration file will be loaded first.
+</blockquote>
+
+<a name="sampling">
+<h4>Sampling Superpositions</h4></a>
+<blockquote>
+<tt><b>-fm</b> <i>L</i></tt>
+<br><i>L</i> is the fragment length to be used for generating superpositions.
+All contiguous fragments of <i>L</i> residues in <i>pdb2</i>
+will be superimposed on all contiguous fragments of
+<i>L</i> residues in <i>pdb1</i>.  This only applies to residues with ATOM
+records that contain CA (or the atom name(s) specified in
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#customize"><i>atoms.file</i></a>);
+HETATM residues are ignored.
+<i>L</i> must be an integer.  Specifying <i>L</i>=0 turns off the generation
+of superpositions by fragment matching (rarely used); otherwise, <i>L</i>
+should be at least 3 (default 4).  Using <b>-FM</b> also turns
+off fragment matching.
+</blockquote>
+<blockquote>
+<tt><b>-hs</b></tt>
+<br> Only residues within the secondary structures defined
+by HELIX and SHEET records in the PDB file are to be used for generating
+superpositions.  Helix fragments will only be superimposed on helix fragments
+and sheet fragments will only be superimposed on sheet fragments, which reduces
+sampling and decreases run time.  Note that there must be HELIX and SHEET
+records in each PDB file.  In fact, <b>-hs</b> is not necessary since
+this behavior is the default; <b>-HS</b> turns the feature off, so that
+fragments are matched regardless of secondary structure.
+</blockquote>
+<blockquote>
+<tt><b>-read-msf</b> <i>name1,name2 file1.msf[,file2.msf,...]</i></tt>
+<br>A least-squares fit of residues aligned in each input MSF file
+is used to generate a superposition.  This flag can
+be used together with or instead of <b>-fm</b>.
+Since MSF files may contain more than two sequences, it is necessary
+to specify <i>name1</i> and <i>name2</i>, the names of the sequences
+within the MSF file(s) corresponding to the structures <i>pdb1</i>
+and <i>pdb2</i>, respectively.  In fact, if the input MSF files were
+generated with <b>MinRMS</b>, <i>name1</i> and <i>name2</i> will be
+the same as <i>pdb1</i> and <i>pdb2</i> in the original command.
+The output MSF files will not necessarily be the same as in the input
+MSF files; an input MSF file determines which residue pairings are used for
+orientation or superposition, while an output MSF file reflects
+spatial proximity in the result (if a set of <i>n</i> pairings within
+the superposition has the lowest RMSD of any set of <i>n</i> pairings
+in any of the superpositions generated during the run).
+Input MSF files must contain at least three residue pairings.
+</blockquote>
+<blockquote>
+<tt><b>-read-matrix</b> file1.mat[,file2.mat,...]</tt>
+<br>Input translation/rotation matrices are used to specify orientations
+of the structure in <i>pdb2</i> relative to its input coordinates.
+Each translation/rotation matrix file should contain three rows
+and four space-separated columns (free format).
+For example, if a matrix file contains the following:
+<table>
+<tbody><tr><td>0.98</td>  <td>0.19</td> <td>-0.06</td> <td>3.47</td></tr>
+<tr><td>-0.18</td> <td>0.98</td>  <td>0.10</td> <td>-4.99</td></tr>
+<tr><td>0.08</td> <td>-0.08</td> <td>0.99</td> <td> 5.86</td></tr>
+</tbody></table>
+the new coordinates X', Y', and Z' are defined relative to the input
+coordinates X, Y, and Z according to:
+<table>
+<tbody><tr><td>X' = </td><td>0.98X</td>  <td>+ 0.19Y</td> <td>- 0.06Z</td> <td>+ 3.47</td></tr>
+<tr><td>Y' = </td><td>-0.18X</td> <td>+ 0.98Y</td>  <td>+ 0.10Z</td> <td>- 4.99</td></tr>
+<tr><td>Z' = </td><td>0.08X</td> <td>- 0.08Y</td> <td>+ 0.99Z</td> <td>+ 5.86</td></tr>
+</tbody></table>
+This flag can be used together with or instead of <b>-fm</b>.
+</blockquote>
+<blockquote>
+<tt><b>-fm-interval</b> <i>p1filters</i><b>,</b><i>p2filters</i></tt>
+<br>This rarely used flag is analogous to <b>-hs</b>,
+but the intervals to be superimposed are specified manually rather than by
+HELIX and SHEET records.  <i>p1filters</i> and <i>p2filters</i> each
+take the same form as described above for
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#filters"> <i>filters</i></a> except that only one interval
+in each PDB file may be specified per invocation of the flag.
+The names <i>pdb1</i> and <i>pdb2</i> are not included; <i>p1filters</i>
+must refer to <i>pdb1</i> and <i>p2filters</i> to <i>pdb2</i>.
+The flag may be invoked multiple times in the same command, allowing
+multiple interval pairs to be specified for the run.
+</blockquote>
+
+<a name="refining">
+<h4>Refining Superpositions</h4></a>
+<blockquote>
+<tt><b>-r</b></tt>
+<br>In most cases, a superposition is initially obtained by fitting short
+stretches of residues to each other (length <i>L</i> specified with the
+flag <b>-fm</b>).  The sequence alignment is then determined by spatial
+proximity in the structural alignment, and in general will contain more than
+<i>L</i> residue pairings.  When refinement is specified with the <b>-r</b>
+flag, each structural alignment on the "lowest-RMSD list" (see
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#method">METHOD</a>) is iteratively adjusted by including the
+residue pairs found to be close together in space in the fit.
+In other words, the <i>n</i>th superposition on the "lowest-RMSD list"
+is adjusted to further minimize the RMSD of its <i>n</i> residue pairings.
+Alignments are iterated to convergence by steepest descent.
+Note that if suboptimal superposition sets have been requested using
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#expanding"><b>-alt-r</b></a>,
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#expanding"><b>-alt-o</b></a>, or
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#expanding"><b>-alt-o-orig</b></a>, only the lowest-RMSD list of
+alignments will be refined.
+<b>-R</b> turns off refinement (on by default).
+</blockquote>
+<blockquote>
+<tt><b>-ir</b></tt>
+<br>Intermediate refinement involves the same procedure as the refinement
+described above, except that it is applied at intermediate stages, before
+construction of the "lowest-RMSD list."  Using both types of refinement is
+recommended since results are improved without a marked increase in run time.
+<b>-IR</b> turns off intermediate refinement (on by default).
+</blockquote>
+
+<a name="pruning">
+<h4>Pruning Output and Increasing Efficiency</h4></a>
+<blockquote>
+<tt><b>-of</b> <i>distcut[,minprs]</i></tt>
+<br>Superpositions that do not contain at least <i>minprs</i> residue
+pairings with distances within <i>distcut</i> are thrown out.  The
+parameter <i>minprs</i> may be expressed as an integer
+ranging from 1 to <i>N</i> (defined in <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#method">METHOD</a>),
+which is interpreted literally, or a fraction ranging from 0 to 1, which
+is multiplied by <i>N</i>.  The <i>minprs</i> argument is not necessary
+when also specified with <b>-minN</b> (below), but a different
+value may be used if desired.  This orientation filtering is turned off
+by <b>-OF</b> (and is off by default).
+</blockquote>
+<blockquote>
+<tt><b>-minN</b> <i>minprs</i></tt>
+<br>For each superposition, only alignments with <i>minprs</i> or more
+residue pairings are found and stored.
+High values of this parameter can reduce computation time substantially.
+Any output MSF files <b>align<i>n</i>.msf</b> 
+will have <i>n</i> equal to or greater than <i>minprs</i>.
+The parameter <i>minprs</i> may be expressed as an integer
+ranging from 1 to <i>N</i> (defined in <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#method">METHOD</a>),
+which is interpreted literally, or a fraction ranging from 0 to 1, which
+is multiplied by <i>N</i>.
+</blockquote>
+
+<blockquote>
+<a name="maxprune">
+<tt><b>-maxN</b> <i>maxprs</i></tt></a>
+<br>For each superposition, only alignments with <i>maxprs</i> or fewer
+residue pairings are found and stored (completely analogous to
+<b>-minN</b> above).  This can be used to save time and memory
+when it is known that high-quality alignments will not contain more than
+<i>maxprs</i> residue pairings.
+The parameter <i>maxprs</i> may be expressed as an integer
+ranging from 1 to <i>N</i> (defined in <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#method">METHOD</a>),
+which is interpreted literally, or a fraction ranging from 0 to 1, which
+is multiplied by <i>N</i>.
+</blockquote>
+<blockquote>
+<tt><b>-max-rmsd</b> <i>rmsdcut</i></tt>
+<br>The search for lowest-RMSD pairings by the dynamic programming
+algorithm is speeded up by early termination when the RMSD
+exceeds <i>rmsdcut</i> Angstroms.  A value of 3.5 is usually appropriate.
+</blockquote>
+<blockquote>
+<tt><b>-max-dist</b> <i>maxdcut</i></tt>
+<br>Paired (aligned) residues must be within <i>maxdcut</i> Angstroms
+of each other.  Values of 5.5 to 10.0 Angstroms are appropriate in
+most cases.
+</blockquote>
+
+<a name="expanding">
+<h4>Expanding Output to Include Suboptimal Alignments</h4></a>
+<p>
+It is possible to save, in addition to
+structural alignments on the "lowest-RMSD list" (see
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#method">METHOD</a>), the "second-lowest-RMSD list," 
+"third-lowest-RMSD list," <i>etc</i>.
+If the <i>m</i>th lowest-RMSD list is saved, the output MSF files are
+named <b>align<i>m</i>_<i>n</i>.msf</b>, where <i>n</i>
+is the number of residue pairings within each structural alignment
+used to calculate the RMSD.
+</p>
+<p>
+One problem that arises when additional lists are saved is
+that the resulting structural alignments may be extremely similar
+to their lowest-RMSD counterparts.  The two flags that specify additional
+lists should be saved also indicate different methods for deciding whether
+structural alignments are different enough to be considered distinct
+solutions.
+</p>
+<blockquote>
+<tt><b>-alt-r</b> <i>M[,prs_sim][,rmsd_ratio]</i></tt>
+<br>Save <i>M</i> lists of structural alignments, from the lowest RMSD
+to the <i>M</i>th lowest RMSD.  This option is time-consuming and
+scales approximately linearly with <i>M</i>.  Structural alignments with
+the same number of residue pairings will be considered identical if they have
+more than <i>prs_sim</i> pairings in common (default zero).
+A superposition will be discarded
+if the ratio of its RMSD to that of the lowest-RMSD superposition with
+the same number of residue pairings is greater than <i>rmsd_ratio</i> (values
+must be &gt; 1.0; 1.5-3.0 recommended; default effectively high, so
+that no solutions are discarded on the basis of RMSD).  Specifying
+<i>rmsd_ratio</i> prevents calculation of
+poor-quality alignments and yields substantial time savings
+when combined with
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#pruning"><b>-minN</b></a> and at least one of the following:
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#maxprune"><b>-maxN</b></a>,
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#maxprune"><b>-max-rmsd</b></a>, or
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#maxprune"><b>-max-dist</b></a>.
+However, specifying <i>rmsd_ratio</i> increases memory usage and
+may not work on all systems; invoking "unlimit" before running is
+also recommended.
+</blockquote>
+<p></p>
+<blockquote>
+<tt><b>-alt-o</b> <i>M,orient_sim[,rmsd_ratio]</i></tt>
+<br>Save <i>M</i> lists of structural alignments, from the lowest RMSD
+to the <i>M</i>th lowest RMSD.  This option is much less time-consuming
+than <b>-alt-r</b>, but memory usage is high and it may not
+work on all systems; invoking "unlimit" before running is recommended.
+Superpositions with the same number of residue pairings will be considered
+identical if the RMSD between the two orientations of <i>pdb2</i> (remember
+that <i>pdb1</i> is fixed) is less than <i>orient_sim</i> Angstroms.
+Reasonable values are 4.0-15.0 Angstroms, depending on the size
+of <i>pdb2</i>.  Use of <i>rmsd_ratio</i> is optional but
+recommended to reduce disk space usage by scratch (temporary) files;
+the meaning is the same as described above for <b>-alt-r</b>.
+</blockquote>
+<blockquote>
+<tt><b>-alt-o-orig</b> <i>M,orient_sim[,rmsd_ratio]</i></tt>
+<br>Usage and parameters are the same as for <b>-alt-o</b> above;
+differences are that the temporary files are smaller and intermediate
+refinement (see <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#refining"><b>-ir</b></a>; on by default) is disabled.
+Use of <b>-alt-o</b> with a suitable <i>rmsd_ratio</i> value
+is generally preferred over use of <b>-alt-o-orig</b>.
+</blockquote>
+
+<a name="customize">
+<h4>Atoms Used in Superposition and RMSD Calculation</h4></a>
+<blockquote>
+<tt><b>-atoms-used</b> <i>atoms.file</i></tt>
+<p>The atoms in each residue named in <i>atoms.file</i> are used for
+superposition and RMSD computation; the default is to use only the
+atom named CA.  Four peptide backbone atoms
+would be used per residue if the file were to contain:<tt>
+<br>" N"
+<br>" CA"
+<br>" C"
+<br>" O"
+</tt><br>
+<b>without the quote marks</b>, which are just there to show spaces.
+There cannot be extra spaces after the atom names.  If more than one
+atom per residue is specified, options involving the distance
+between paired residues
+(<b><a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#pruning">-of</a></b>,
+<b><a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#maxprune">-max-dist</a></b>)
+will instead use the RMSD between the sets of specified atoms in the
+paired residues.
+The <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/atoms_used.txt">example file</a> can be copied and
+modified for your own use.
+</p>
+</blockquote>
+<a name="rescodes">
+<h4>One-Letter Residue Codes</h4></a>
+<blockquote>
+<tt><b>-res-code-dict</b> <i>rescodes.file</i></tt>
+<p>Residue names in the input PDB files must be translated into one-letter
+codes to allow output of sequence alignments in
+MSF format.  By default, <b>MinRMS</b>
+"knows" the correct one-letter codes for the standard amino acid residues.
+The <i>-res-code-dict</i> flag should be used
+if an input PDB file contains nonstandard residues with ATOM records
+and a translation for these residues other than "x" is desired.
+</p>
+<p>
+Invoking <i>-res-code-dict</i> turns off the defaults,
+so all residues present in the PDB file should be included
+in <i>rescodes.file</i>.  The format is two columns
+separated by one or more spaces; <b>the first line should be as shown</b>
+(although another character may be substituted for "x"):<tt>
+<br>unknown x
+<br>ALA A
+<br>CYS C
+<br>CYX C
+<br>ASP D
+<br>JNK J
+<br>GLY G
+<br>ZZZ Z
+<br><i>(etc).</i></tt>
+<br> Residues not specified explicitly will be assigned according
+to the first line; otherwise, order is not important.  Currently,
+only three-letter input codes can be handled.
+The one-letter codes cannot be numerals (0-9).  The
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/res_code_dict.txt">example file</a> can be copied and
+modified for your own use.
+</p>
+</blockquote>
+<hr>
+
+<a name="examples">
+<h4>EXAMPLES</h4></a>
+Command-line options may require one or
+more parameters; when multiple parameters are required for
+the same option, they should be separated by commas only (not spaces).
+The command should be entered as a single line; "\" is used to indicate
+that the next line is a continuation of the current line.
+<ol>
+<li><b>Recommended Usage</b>:
+<blockquote><tt>
+<b>minrms <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#sampling">-fm</a> 4 <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#pruning">-of</a> 8.0,0.33
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#sampling">-HS</a></b> \
+<br><b><a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#pruning">-minN</a> 0.33 <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#maxprune">-max-rmsd</a> 3.5
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#refining">-ir</a> <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#refining">-r</a></b> \
+<br><b>hemoglobin.pdb,"*.A" myoglobin.pdb</b>
+</tt></blockquote>
+<blockquote>
+PDB entries used:  4hhb (hemoglobin), 1a6m (myoglobin)
+</blockquote>
+Superimpose myoglobin (151 residues) on the A chain of hemoglobin (141 residues)
+using a fragment size of four residues; discard superpositions in which
+there are not at least 47 (141 x 0.33) residue pairings with distances
+within 8.0 Angstroms; only find and output alignments with at least 47
+residue pairings and RMSD within 3.5 Angstroms;
+iteratively refine superpositions at all stages.
+The quotes surrounding the specification of hemoglobin's A chain are needed
+since an asterisk has been used (see <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#filters">FILTERS</a>).
+The equivalent specifications
+<blockquote><tt>
+<b>"hemoglobin.pdb,*.A"</b>
+<br>or
+<br><b>hemoglobin.pdb,.A</b>
+</tt></blockquote>
+would also be acceptable.
+The images shown in the <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#display">DISPLAY</a> section correspond
+to this example.
+<p>
+<b>**</b>If the molecules are fairly large, and there are HELIX and SHEET
+records in the PDB files, using
+<b><a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#sampling">-hs</a></b> instead of
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#sampling"><b>-HS</b></a> is recommended.
+This specifies that only fragments that are both helical
+or both sheet will be superimposed.  In fact, simply omitting
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#sampling"><b>-HS</b></a> will activate this feature,
+since it is on by default.
+</p>
+</li><li><b>Thorough But Slow</b>:
+<blockquote><tt>
+<b>minrms <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#sampling">-HS</a>
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#refining">-ir</a> <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#refining">-r</a></b> \
+<br><b>calmod.open calmod.closed</b>
+</tt></blockquote>
+<blockquote>
+PDB entries used:  4cln (open form), 2bbm (closed form)
+</blockquote>
+Superimpose closed form of calmodulin (136 residues plus 19 residues of bound
+peptide in structure) on the open form of calmodulin (148 residues)
+using a fragment size of four residues (the default);
+iteratively refine superpositions at all stages.
+The <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#sampling"><b>-HS</b></a> flag is needed because
+one of the files does not contain HELIX or SHEET records.
+<p>
+In general, if there is prior knowledge of which regions of the structures
+are structurally similar, it should be used (via filters
+or editing parts of the PDB files away).  In this case, a bent
+dumbbell is being superimposed on a straight dumbbell and only about half
+of the molecule can superimpose well in any given orientation.  If
+<b><a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#pruning">-minN</a> 0.33</b> had been used,
+many visually pleasing superpositions with fewer than 49 (148 x 0.33)
+residue pairings would have been thrown out.  Unless
+<b><a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#maxprune">-max-rmsd</a></b> or
+<b><a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#maxprune">-max-dist</a></b>
+were also used, most of the output superpositions would be of poor quality.
+</p>
+</li><li><b>Filters</b>:
+<blockquote><tt>
+<b>minrms <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#sampling">-fm</a> 3 <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#sampling">-HS</a>
+<a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#refining">-ir</a> <a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#refining">-r</a></b> \
+<br><b>tryp.pdb,57,100-105,194-200</b> \
+<br><b>chym.pdb,50-110.B,190-200.C</b>
+</tt></blockquote>
+<blockquote>
+PDB entries used:  1ane (trypsin), 1ab9 (chymotrypsin)
+</blockquote>
+Superimpose chymotrypsin on trypsin, concentrating on the regions containing
+the catalytic triad (57, 102, and 195 in trypsin; 57 and 102 in chain B and
+195 in chain C in chymotrypsin).  The residues specified for each
+file must add up to at least the fragment length specified with
+<b><a href="http://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#sampling">-fm</a></b>, and three is the minimum
+value allowed for this parameter.  Although not contiguous in the protein
+trypsin, the residues 57 and 100 (for example) are contiguous for the purposes
+of <b>MinRMS</b>, in the sense that they are adjacent in the filtered set.
+It is not necessary for the number
+of residues specified in <i>pdb1</i> to be the same as the number of residues
+specified in <i>pdb2</i>.
+</li></ol>
+<hr>
+
+<a name="refs">
+<h4>LITERATURE REFERENCES</h4></a>
+<ol>
+<li>A.I. Jewett, C.C. Huang, and T.E. Ferrin,
+<a href="http://bioinformatics.oupjournals.org/cgi/content/abstract/19/5/625?ijkey=uUdrljhuLNTZA&amp;keytype=ref&amp;siteid=bioinfo" target="_blank">
+"MINRMS:  an efficient algorithm for determining protein structure 
+similarity using root-mean-squared-distance"</a>
+<i>Bioinformatics</i> <b>19</b>:625 (2003).
+
+</li><li>C.C. Huang, W.R.Novak, P.C. Babbitt, A.I. Jewett, T.E. Ferrin, and T.E.
+Klein, <a href="http://www.ncbi.nlm.nih.gov/pubmed/10902172" target="_blank">
+"Integrated Tools for Structural and Sequence Alignment and Analysis"</a>
+<i>Pac Symp Biocomput</i> <b>5</b>:227 (2000).
+
+</li><li>R. Diamond, "A Note on the Rotational Superposition Problem"
+<i>Acta Cryst</i> <b>A44</b>:211 (1988).
+</li></ol>
+
+<hr>
+<address>UCSF Computer Graphics Laboratory / October 2006</address>
+
+</body></html>

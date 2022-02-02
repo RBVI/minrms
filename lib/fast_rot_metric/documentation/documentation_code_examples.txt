@@ -1,0 +1,156 @@
+
+
+void SampleCode()
+{
+		const int N;
+		float aData[N][3]; //list of positions
+		
+		float O1[3][4]; //Two different orientation matrices
+		float O2[3][4]; //to apply to the original vectors in aData
+
+		... read in aData and O1 and O2 ...
+		float eigenvals[3];
+		float CP[3][4]; //First three collumns will store the 3 principle axis.
+		                //(last column stores centroid)
+
+		FindPrincipleAxis(aData, //coordinates of input data
+		                  N, //number of points
+		                  eigenvals, //<-where the eigenvals will be stored
+		                  CP //<-where the principle axis and centroid will be
+		                  ); //  stored.
+		
+		float O1inPA[3][4]; //Orientation to apply to positions that are 
+		float O2inPA[3][4]; //already expressed in terms of the principle-
+		                    //axis basis.
+
+		MatrixMultiply(O1inPA, O1, CP); //express in terms of data that's
+		MatrixMultiply(O2inPA, O2, CP); //already in the principle-axis basis
+
+
+
+		... sometime later ...
+
+
+
+		//Okay, now compute the "distance" between the orientations:
+		float sum_sqd_dist = FastRotSumSqdDist(O1inPA,
+		                                       O2inPA,
+		                                       eigenvalues,
+                                               N);
+}
+
+
+
+
+// ---------- Documentation of Functions used: ----------------
+
+
+
+---- Functions in "src/minrms/lib/fast_rot_metric/principle_axis.h" --------
+//FindPrincipleAxis() takes a list of points in 3 dimensions, and returns
+//a 3x4 matrix principleAxisAndCentroid, storing the 3 principle axis of
+//those points in the first three collumns,and the centroid in the 4th collumn.
+//   All points are weighted equally in the calculation.
+//The results are in the following form:
+//You can find the principle axis, by examining the rows of T
+//The ith collumn of T, store the normalized eigenvector corresponding
+//to the ith entry of "eigenvalues".
+//The 4th collunn stores the centroid (center-of-mass) of the points.  To
+// get the matrix that represents the transformation from original coordinates
+//to center-of-mass-principle-axis coordinates, calculate the inverse of the
+//"principleAxisAndCentroid" matrix using FindInverseOfRotTransMatrix3x4().
+//
+// Important:
+//           This yeilds eigenvalues that indicate the VARIANCE in the 
+//           positions of the points along each axis, and the principle
+//           axis are chosen to minimize this variance.
+//           This is as opposed to to finding the axis of minimal ROTATIONAL
+//           energy (as physics/mech-E people do).  The axis turns out
+//           to be the same for both these methods, but the EIGENVALUES
+//           are different.  The eigenvalues for the first method yeild
+//           degree of variance along each axis (which is what this function
+//           returns).
+//           The eigenvalues for the second method yeild rotational energy
+//           when spinning around each axis (NOT what this function returns).
+void
+FindPrincipleAxis(ConstVect3 *aR, //<--array of input points
+				  int num_points, //<--number of entries in aR
+				  Vect3 eigenvalues,
+				  Matrix3x4 principleAxisAndCentroid);
+
+
+
+
+---- Functions in "src/minrms/lib/fast_rot_metric/fast_rot_metric.h" -----
+//FastRotSumSqdDist() returns the sum-squared distance between the positions
+//of a set of points, with two different rotations and translations applied
+//to it, collectively stored in O1 and O2.  Instead of applying the two
+//rotations and translations to every point in the set, and calculating the
+//rmsd manually, only, the principle axis are needed, and their eigenvalues.
+//Not having to loop over every point in the set speeds things up considerably.
+//The same answer is obtained, but using a faster method.
+//
+//Important: The two orientations stored in O1, and O2, are assumed to be
+//           acting on a set of points that is already rotated so that
+//           its centriod is at the origin, and
+//           its 3 principle axis lie along the x, y, and z axis,
+//           (with the corresponding eigenvalues are stored in
+//            principleAxisEigenvalues[0], [1], [2])
+//           If this is not the case, then you must apply additional rotations/
+//           translations O1, and O2, to compensate.
+//           (Hint: There is a Matrix3x4 returned by FindPrincipleAxis().
+//                  If you add a 4th row storing [0 0 0 1] to this matrix,
+//                  and multiply them together (with O1 or O2 on the LEFT),
+//                  the resulting 3x4 product of the two matrices will have
+//                  the desired property.  Pass this matrix to FastRotRMSD())
+//
+//           (I don't do this automatically, because it's a lot of extra
+//            computation, this only needs to be done once per orientation
+//            However, this function get's called much more frequently than
+//            that.)
+//
+//Important2: Different kinds of litterature dissagree on their definition of
+//           the principle axis.  I diagonalise Qij = sum_over_a {Rai*Raj}.
+//           This yeilds eigenvalues that indicate the VARIANCE in the 
+//           positions of the points along each axis, which are chosen to
+//           minimize this variance.
+//           This is as opposed to to finding the axis of minimal rotational
+//           energy, which is what physics/mech-E people do.
+//           (They turn out to be the same, but the eigenvalues are different.)
+//               Using the function FindPrincipleAxis(), gaurantees
+//           that the eigenvalues in the correct format and
+//           order.  This function is located in
+//             ../principle_axis/principle_axis.cc
+
+inline float
+FastRotSumSqdDist(ConstMatrix3x4 O1,
+                  ConstMatrix3x4 O2,
+				  ConstVect3 principleAxisEigenvalues,
+				  int num_points)
+
+
+
+
+// MatrixMultiply3x4() Computes A = BC, stores in A
+//A, B, C are all affine transformations expressed in terms of a 3x4 matrix.
+//This is the same as if we were multiplying two 4x4 matrices
+//together (containing [0 0 0 1] as the 4th row), and discard the last row.
+
+MatrixMultiply3x4(float A[3][4],
+                  const float B[3][4],
+                  const float C[3][4])
+{
+	for(int i=0; i < 3; ++i)
+    {
+		for(int j=0; j < 4; ++j)
+        {
+			A[i][j] = 0.0f;
+			for(int k=1; k < 3; ++k)
+            {
+				A[i][j] += B[i][k] * C[k][j];
+            }
+			A[i][3] += B[i][3];//Odd shaped matrix needs special handling.
+	                           //Add the translational part of B to A.
+		}
+	}
+}
