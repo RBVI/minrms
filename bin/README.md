@@ -25,11 +25,6 @@ Most users probably do not need to do this.*
   pairwise ALIGN server output to
   MSF format.
 
-- **fssp2msf**
-  Converts Holm&Sander's
-  DALI server output (FSSP)
-  to MSF format.
-
 - **msf2sequence**
   Extracts a single sequence from
   one of the sequences aligned

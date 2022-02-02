@@ -1,18 +1,33 @@
 fssp2msf
 ========
 
+# THIS PROGRAM IS DEPRECIATED
+
+***As of 2022-2-02 The DALI server and the FSSP file format that it uses
+are no longer maintained or supported.
+There is no longer a need for this program.
+It will likely be removed in the future.
+-Andrew***
+
+
 ## Usage
 
 ```
-   fssp2msf fssp_file pdb_file1 pdb_file2 labelA labelB [msf_labelA msf_labelB]
+fssp2msf fssp_file pdb_file1 pdb_file2 labelA labelB [msf_labelA msf_labelB]
 ```
 fssp2msf converts alignments between a pair of proteins in the
-FSSP format into an MSF file.  The FSSP file is read from the
-standard in, and the MSF file is saved as a file with the same name.
-as the fssp_file, plus an ".msf" extension.
+FSSP format into an MSF file.
+The MSF file is saved as a file with the same name as the fssp_file,
+with an ".msf" extension appended at the end of the name of the file.
 - fssp_file is a file describing a structural alignment between several
   molecules in FSSP format.  (This is the format used by the DALI
   server.)  For more information, see: http://www2.ebi.ac.uk/dali/fssp
+  ***WARNING: This link no longer works as of 2022-2-02***
+- The MSF file format is explained
+  [here.](http://rothlab.ucdavis.edu/genhelp/chapter_2_using_sequences.html#_Specifying_RSF_Files)
+ *(MSF files can be converted to and from other
+ more popular alignment file formats (such as FASTA) using
+[aligncopy](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*
 - "pdb_file1" and "pdb_file2" are PDB files describing the two
   structures being aligned, and "labelA","labelB" are the
   labels used to identify these structures inside the FSSP file.

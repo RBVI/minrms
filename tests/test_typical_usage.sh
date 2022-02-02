@@ -12,7 +12,8 @@ test_simple() {
                          hemoglobin.pdb,"*.A" myoglobin.pdb
 
     assertTrue "align141.msf file not created" "[ -s align141.msf ]"
-    rm -f align*.msf align_chimera.* *.pdb 
+    rm -f align*.msf align_chimera.*
+    #rm -f *.pdb  (commenting out. we might need these files later.)
   cd ../
 }
 

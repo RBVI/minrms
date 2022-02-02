@@ -1,6 +1,3 @@
-minrms
-======
-
 # *REDIRECTION NOTICE*
 
 Documentation for the MINRMS program is in HTML format

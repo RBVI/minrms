@@ -3,22 +3,30 @@ msf2stat3d
 
 ## Syntax:
 ```
-   msf2stat3d [-oGg] msf_file labelA labelB pdb_fileA pdb_fileB
+msf2stat3d [-oGg] msf_file labelA labelB pdb_fileA pdb_fileB
 ```
-   msf2stat3d superimposes the structures in pdb_fileA and pdb_fileB
+
+## Overview
+
+msf2stat3d superimposes the structures in pdb_fileA and pdb_fileB
 in order to minimize the root-mean-squared-displacement (RMSD)
 between matched CA atoms according to the alignment stored
 in msf_file.  It then calculates several structural properties
 which are returned to the user.
 
+
 ## Input format
 
 - msf_file is an MSF file containing an alignment between
   two or more sequences.  The MSF file format is explained
-  [here](http://rothlab.ucdavis.edu/genhelp/chapter_2_using_sequences.html#_Using_Multiple_Sequence_Format_(MSF)
+  [here.](http://rothlab.ucdavis.edu/genhelp/chapter_2_using_sequences.html#_Specifying_RSF_Files)
+  *(MSF files can be converted to and from other
+  more popular alignment file formats (such as FASTA) using
+[aligncopy](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*
 - pdb_fileA and pdb_fileB should contain structures corresponding
   to the sequences in the msf_file prefixed by the
   labelA and labelB identifiers, respectively.
+
 
 ## Output format
 

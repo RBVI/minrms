@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/jewettaij/minrms.svg?branch=master)](https://travis-ci.com/jewettaij/minrms.svg?branch=master)
+[![Build Status](https://circleci.com.com/jewettaij/minrms.svg?branch=master)](https://circleci.com.com/jewettaij/minrms.svg?branch=master)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/jewettaij/minrms)]()
 [![Website](https://img.shields.io/website?down_color=orange&down_message=moltemplate.org%20offline&up_color=green&up_message=online&url=https%3A%2F%2Fwww.cgl.ucsf.edu%2FResearch%2Fminrms)](http://www.cgl.ucsf.edu/Research/minrms)
 
@@ -32,7 +32,10 @@ and is often quoted as a measure of alignment quality.
 Unlike earlier probabilistic programs, MINRMS performs an exhaustive search.
 
 Generated alignments are stored in
-[MSF format.](http://rothlab.ucdavis.edu/genhelp/chapter_2_using_sequences.html#_Using_Multiple_Sequence_Format_(MSF)
+[MSF format.](http://rothlab.ucdavis.edu/genhelp/chapter_2_using_sequences.html#_Specifying_RSF_Files)
+*(MSF files can be converted to and from other
+ more popular alignment file formats (such as FASTA) using
+[aligncopy](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*
 
 
 
@@ -54,8 +57,10 @@ minrms -fm 4 -of 8.0,0.33 -HS \
        -minN 0.33 -max-rmsd 3.5 -ir -r \
         hemoglobin.pdb,"*.A" myoglobin.pdb
 ```
-This will find the lowest-possible RMSD alignments between chain A
-of "hemoglobin.pdb" and all of "myoglobin.pdb", with the following constraints:
+
+This will find the lowest-possible RMSD alignments between
+[chain A of "hemoglobin.pdb"](./doc/doc_pdb_select.md#Examples-of-selection-syntax)
+and all of "myoglobin.pdb", with the following constraints:
 
 - Alignments which fail to match at least 33% of the amino acids in both
   protein will be ignored.
