@@ -8,8 +8,9 @@ minrms
 
 ## Background
 
-Similarity in the amino acid sequence of proteins can be difficult
-to detect if they are evolutionarily distant.
+Proteins from evolutionarily distant ancestors can have amino acid sequences
+which are so different that traditional sequence alignment methods can
+fail to detect any similarity.
 However similarity in the 3D structure of proteins often persists long
 [after the sequences have diverged.](https://doi.org/10.1006/jmbi.1993.1489)
 It is possible to detect evolutionary similarity between proteins from
@@ -75,7 +76,7 @@ and all of "myoglobin.pdb", with the following constraints:
 
 You can relax these constraints by ignoring the optional arguments above:
 ```
-minrms -fm 4 hemoglobin.pdb,"*.A" myoglobin.pdb
+minrms -fm 4 -ir -r hemoglobin.pdb,"*.A" myoglobin.pdb
 ```
 *(This will run much more slowly and is not recommended.)*
 
