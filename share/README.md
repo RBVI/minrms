@@ -20,6 +20,8 @@ The "atoms_used.txt" file is usually optional.  It must be present
 in the same directory where the program is invoked.  If it is not supplied,
 then a default behavior is assumed (in the case of minrms, the alpha-carbons
 are used).
+(Alternatively, you can also specify a new name for this file by invoking minrms
+using the "-atoms-used FILENAME" argument.)
 
 Example:
 If minrms were invoked in the same directory containing the atoms_used.txt
@@ -33,8 +35,9 @@ file shown below
 ...*then* the nitrogen, alpha-carbon, carbon, and oxygen atoms
 (the atoms along a protein's backbone) would be used to calculate RMSD
 between residues in the alignment.
-*(A blank space must precede the atom names on each line, eg " N", " C",...
-Note, the quotes (") were added above only to clarify the position of
+*(Note:
+A blank space must precede the atom names on each line, eg " N", " C",...
+The quotes (") were added above only to clarify the position of
 whitespace in the file and should not appear in the "atoms_used.txt" file.)*
 
 
@@ -68,3 +71,5 @@ by the letter "x" in the MSF-file.
 The "res_code_dict.txt" file is optional.
 If it is not supplied, then a default translation is used.
 Otherwise it must be present in the same directory where the program is invoked.
+(Alternatively, you can also specify a new name for this file by invoking minrms
+using the "-res-code-dict FILENAME" argument.)

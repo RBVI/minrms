@@ -25,7 +25,7 @@ distantly related organisms by examining their 3D structure.
 ## MINRMS
 
 MINRMS is a program for aligning two proteins
-(or [RNA chains](#Nucleic-Acids))
+*(or [biopolymers](./doc/doc_nucleic_acids.md))*
 by considering their 3D structure.
 It reads two PDB files and tries to find a subset of residues from either
 molecule with similar shape.
@@ -61,7 +61,7 @@ Documentation for other programs bundled with minrms can be found
 ## Example Usage
 
 ```
-minrms -fm 4 -of 8.0,0.33 -HS \
+minrms -fm 4 -of 8.0,0.33 \
        -minN 0.33 -max-rmsd 3.5 -ir -r \
         hemoglobin.pdb,"*.A" myoglobin.pdb
 ```
@@ -79,13 +79,19 @@ and all of "myoglobin.pdb", with the following constraints:
   alignments between distant portions of the molecules.)
 - Alignments which fail to match *any* secondary structure
   (helices with helices or sheets with sheets) will be ignored.
-  *(If your PDB files lack HELIX or SHEET records, omit the "-HS" argument.)*
+  *(If your PDB files lack HELIX or SHEET records, include the "-HS" argument.)*
 
 You can relax these constraints by ignoring the optional arguments above:
 ```
 minrms -fm 4 -ir -r hemoglobin.pdb,"*.A" myoglobin.pdb
 ```
 *(This will run much more slowly and is not recommended.)*
+
+
+### *Troubleshooting*
+
+If either of the PDB files lack HELIX and SHEET secondary structure
+information, you must warn **minrms** by including the "-HS" argument.
 
 
 ## Requirements
@@ -152,12 +158,3 @@ are the number of amino acids in each protein.
 When no constraints are used, MINRMS has a running time of *O(m^3 n^2)*.
 
 
-## Nucleic Acids
-
-It is possible to use minrms to align nucleic acid structures.
-To do that, create a custom [atoms_used.txt](./share/README.md) file containing
-the PDB codes for each type of atom you want to use for structure comparison.
-(It must be an atom type common to all RNA or DNA nucleic acids.)
-Then run minrms using the
-[-atoms-used](https://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#customize) argument, and omit the "-HS" argument.
-Please contact me if you need help with this.
