@@ -22,7 +22,7 @@ which are returned to the user.
   [here.](http://rothlab.ucdavis.edu/genhelp/chapter_2_using_sequences.html#_Specifying_RSF_Files)
   *(MSF files can be converted to and from other
   more popular alignment file formats (such as FASTA) using
-[aligncopy](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*
+  [aligncopy.](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*
 - pdb_fileA and pdb_fileB should contain structures corresponding
   to the sequences in the msf_file prefixed by the
   labelA and labelB identifiers, respectively.

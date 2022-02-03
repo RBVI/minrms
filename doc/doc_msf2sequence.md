@@ -18,4 +18,4 @@ The MSF file format is explained
 [here.](http://rothlab.ucdavis.edu/genhelp/chapter_2_using_sequences.html#_Specifying_RSF_Files)
 *(MSF files can be converted to and from other
 more popular alignment file formats (such as FASTA) using
-[aligncopy](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*
+[aligncopy.](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*

@@ -14,7 +14,7 @@ by the ALIGN server, and converts it to an
 which was named "output.msf" in the example above.
 *(MSF files can be converted to and from other
  more popular alignment file formats (such as FASTA) using
-[aligncopy](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*
+[aligncopy.](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*
 
 The first argument is a file containing the output from the ALIGN server.
 The last two arguments contain PDB files for the structures

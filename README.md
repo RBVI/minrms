@@ -1,10 +1,15 @@
 [![CircleCI](https://img.shields.io/circleci/build/github/jewettaij/minrms/main)](https://circleci.com/gh/jewettaij/minrms)
+[![C++11](https://img.shields.io/badge/C%2B%2B-11-blue.svg)](https://isocpp.org/std/the-standard)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/jewettaij/minrms)]()
 [![Website](https://img.shields.io/website?down_color=orange&down_message=moltemplate.org%20offline&up_color=green&up_message=online&url=https%3A%2F%2Fwww.cgl.ucsf.edu%2FResearch%2Fminrms)](http://www.cgl.ucsf.edu/Research/minrms)
 
 
 minrms
 ===========
+<a href="http://www.cgl.ucsf.edu/Research/minrms">
+<img src="https://www.rbvi.ucsf.edu/Research/projects/minrms/minrms.jpg" height=521>
+</a>
+
 
 ## Background
 
@@ -12,7 +17,7 @@ Proteins from evolutionarily distant ancestors can have amino acid sequences
 which are so different that traditional sequence alignment methods can
 fail to detect any similarity.
 However similarity in the 3D structure of proteins often persists long
-[after the sequences have diverged.](https://doi.org/10.1006/jmbi.1993.1489)
+[after their sequences have diverged.](https://doi.org/10.1006/jmbi.1993.1489)
 It is possible to detect evolutionary similarity between proteins from
 distantly related organisms by examining their 3D structure.
 
@@ -20,9 +25,11 @@ distantly related organisms by examining their 3D structure.
 ## MINRMS
 
 MINRMS is a program for aligning two proteins
+(or [RNA chains](#Nucleic-Acids))
 by considering their 3D structure.
-It reads to PDB files and tries to find a subset of residues from either
+It reads two PDB files and tries to find a subset of residues from either
 molecule with similar shape.
+*(CIF and PDBXML formats are not yet supported.)*
 Earlier structural alignment programs used ad-hoc scoring functions
 to distinguish between possible solutions.
 However MINRMS finds alignments which minimize the
@@ -36,7 +43,7 @@ Generated alignments are stored in
 [MSF format.](http://rothlab.ucdavis.edu/genhelp/chapter_2_using_sequences.html#_Specifying_RSF_Files)
 *(MSF files can be converted to and from other
  more popular alignment file formats (such as FASTA) using
-[aligncopy](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*
+[aligncopy.](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*
 
 
 
@@ -108,20 +115,33 @@ If you find this program useful, please cite:
 
 ## Details
 
-RMSD is a simple metric which is easy to interpret.  However it does not
-tell us how many amino acids the two proteins have in common.
-*(It's always possible to find an alignment with lower RMSD
+RMSD is a simple metric which is easy to interpret.  However it does
+not indicate how many amino acids the two proteins have in common.
+In the absence of other criteria, choosing alignments on the basis of their
+RMSD favors alignments with very few residues in common,
+even if the two proteins have nearly identical shape.
+*(This is because it's always possible to find an alignment with a lower RMSD
 by discarding the most distant pair of residues in an existing alignment.)*
-Hence MINRMS will generate alignments of every possible size
-and allow the user to choose between them.
-This can be done using using Levitt and Gerstein's
-[P_str](https://doi.org/10.1073/pnas.95.11.5913) metric,
-which can be calculated using the
-[msf2stat3d program](./doc/doc_msf2stat3d.md)
+To get around this ambiguity,
+MINRMS will generate alignments of every possible size,
+each of which is optimal in RMSD (for alignments of that size).
+It is the responsibility of the user to choose between these alignments.
+
+To do that, users can visually browse all of these alignments using the
+[MinrmsPlot/AlignPlot](https://www.cgl.ucsf.edu/chimera/docs/ContributedSoftware/minrmsplot/minrmsplot.html)
+menu option in
+[Chimera.](https://www.cgl.ucsf.edu/chimera),
+which is shown above.
+This will display each alignment and report it's Levitt and Gerstein's
+[*P_str*](https://doi.org/10.1073/pnas.95.11.5913)
+score (which is plotted in red).
+The *P_str* scores can be used as a basis for selecting the optimal alignment,
+in addition to visual inspection.
+Alternatively the *P_str* scoring metric can also be calculated independently
+using the stand-alone [msf2stat3d program](./doc/doc_msf2stat3d.md)
 which is included with this repository.
-Alternatively users can visually browse all of these alignments using the
-[MinrmsPlot/AlignPlot](http://www.rbvi.ucsf.edu/chimera/1.2065/docs/ContributedSoftware/minrms/minrms.html#alignplot)
-menu option in Chimera.
+(However we strongly recommend viewing the alignments in Chimera
+to make sure the alignment you selected is reasonable.)
 
 
 ## Complexity
@@ -130,3 +150,14 @@ In typical usage (when the recommended settings are used),
 MINRMS has a *O(m^2 n^2)* running time, where *m* and *n*
 are the number of amino acids in each protein.
 When no constraints are used, MINRMS has a running time of *O(m^3 n^2)*.
+
+
+## Nucleic Acids
+
+It is possible to use minrms to align nucleic acid structures.
+To do that, create a custom [atoms_used.txt](./share/README.md) file containing
+the PDB codes for each type of atom you want to use for structure comparison.
+(It must be an atom type common to all RNA or DNA nucleic acids.)
+Then run minrms using the
+[-atoms-used](https://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#customize) argument, and omit the "-HS" argument.
+Please contact me if you need help with this.

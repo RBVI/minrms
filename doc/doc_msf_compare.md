@@ -26,7 +26,7 @@ the two sequences indicated by labelA1/2, and labelB1/2.  (See below)
   [here.](http://rothlab.ucdavis.edu/genhelp/chapter_2_using_sequences.html#_Specifying_RSF_Files)
   *(MSF files can be converted to and from other
   more popular alignment file formats (such as FASTA) using
-[aligncopy](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*
+  [aligncopy.](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*
 - *label arguments:*
   **msf_compare** compares two alignments between the same two sequences,
   Because, MSF files can contain alignments between many sequences,

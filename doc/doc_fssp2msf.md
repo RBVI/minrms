@@ -26,8 +26,8 @@ with an ".msf" extension appended at the end of the name of the file.
 - The MSF file format is explained
   [here.](http://rothlab.ucdavis.edu/genhelp/chapter_2_using_sequences.html#_Specifying_RSF_Files)
  *(MSF files can be converted to and from other
- more popular alignment file formats (such as FASTA) using
-[aligncopy](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*
+  more popular alignment file formats (such as FASTA) using
+  [aligncopy.](http://emboss.sourceforge.net/apps/cvs/emboss/apps/aligncopy.html))*
 - "pdb_file1" and "pdb_file2" are PDB files describing the two
   structures being aligned, and "labelA","labelB" are the
   labels used to identify these structures inside the FSSP file.

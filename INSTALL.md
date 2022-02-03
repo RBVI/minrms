@@ -91,36 +91,37 @@ cp -f bin/align2msf/align2msf.py ~/bin/
 
 If you are using an apple computer, you will need to install a C++11
 compatible compiler.  As of 2022-2-02, this is included with Xcode.
-It can also be installed using the excellent Homebrew package
-management system.
+It can also be installed using the Homebrew (brew) package management system.
 
 
 ## Windows instructions
 
-It is recommended that you install the BASH shell environment on your computer,
-along with *make* and either *gcc* or *clang*.  Once you have done that,
-you can follow the instructions above for linux users.
-There are several ways to to create a BASH environment,
-but perhaps the easiest method is to install
-[Windows Subsystem for Linux (WSL/WSL2)](https://devblogs.microsoft.com/commandline/a-preview-of-wsl-in-the-microsoft-store-is-now-available/)
-***or***
-[virtualbox](https://www.virtualbox.org)
-(In the later case, you will also need to install a linux distribution,
-preferably with a lightweight
-desktop such as [xubuntu](https://xubuntu.org).)
-Alternatively, you can try 
-[Hyper-V](https://www.nakivo.com/blog/run-linux-hyper-v/)
-or (if you have an older version of windows)
-[CYGWIN](https://www.cygwin.com/).
+If you have a preferred way of compiling C++ code and entering commands
+into a terminal, you can probably ignore this section.  Otherwise, read on...
 
+Although it is optional, I recommend installing 
+the BASH shell environment on your computer,
+along with *make* and either *gcc* or *clang*.
+There are several ways to to create a BASH environment in Windows.
+If you are using Windows 10 or 11, perhaps the easiest method is to install
+[Windows Subsystem for Linux (WSL/WSL2)](https://devblogs.microsoft.com/commandline/a-preview-of-wsl-in-the-microsoft-store-is-now-available/)
+*If you have an older version of windows, you can try
+[virtualbox](https://www.virtualbox.org) or [CYGWIN](https://www.cygwin.com/).
+(In the former case, you will also need to install a linux distribution,
+preferably with a lightweight
+desktop such as [xubuntu](https://xubuntu.org).)*
+
+### Background
 WSL and virtualbox are virtual machines that allow you to run an
 alternate operating system from within windows.
 In this case that operating system is linux.  The BASH shell and the
-compiler tools that you need can be easily installed from within in linux.
+compiler tools that you need are usually included with linux.
+If not, they can be easily installed from within in linux.
 Both WSL and virtualbox also create an alternate filesystem inside windows
 where the linux operating system is stored.  Software (like *minrms*)
 that you download and install there can access the files in that filesystem.
 So you may need to copy your PDB files and other files to this fileystem
 beforehand.
 
-These instructions were written on 2022-2-02.
+
+*These instructions were written on 2022-2-02.*
