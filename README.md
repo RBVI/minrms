@@ -53,7 +53,7 @@ Generated alignments are stored in
 MINRMS documentation may be found
 [online](http://www.cgl.ucsf.edu/Research/minrms/),
 and also
-[here.](doc/doc_minrms_html/minrms.html).
+[here.](doc/doc_minrms_html/minrms.html)
 
 Documentation for other programs bundled with minrms can be found
 [here.](./doc).
