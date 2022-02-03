@@ -25,10 +25,11 @@ distantly related organisms by examining their 3D structure.
 ## MINRMS
 
 MINRMS is a program for aligning two proteins
-*(or [biopolymers](./doc/doc_nucleic_acids.md))*
 by considering their 3D structure.
-It reads two PDB files and tries to find a subset of residues from either
-molecule with similar shape.
+*(MINRMS also works with other kinds of
+[biopolymers](./doc/doc_nucleic_acids.md))*
+It reads two PDB files and tries to find a subset
+of residues from either molecule with similar shape.
 *(CIF and PDBXML formats are not yet supported.)*
 Earlier structural alignment programs used ad-hoc scoring functions
 to distinguish between possible solutions.

@@ -1,6 +1,6 @@
 ## Nucleic Acids
 
-It is *possible* to use **minrms** to align nucleic acid chains.
+It is *possible* to use **minrms** to align nucleic acid chains
 *(although it's not clear if this is a useful capability).*
 
 To do that, create a custom [atoms_used.txt](./share/README.md) file containing
@@ -14,7 +14,7 @@ Example "atoms_used.txt" file (containing only one line):
 In that case, the RMSD will be calculated between the positions of C3' atoms
 in either RNA chain.
 *(Note:
-A blank space must precede the atom names on each line, eg " N", " C",...
+A blank space must precede the atom names on each line, eg " C3", " C5'",...
 The quotes (") were added above only to clarify the position of
 whitespace in the file and should not appear in the "atoms_used.txt" file.)*
 
