@@ -21,7 +21,7 @@ whitespace in the file and should not appear in the "atoms_used.txt" file.)*
 Once you have created a new "atoms_used.txt" file, run **minrms** using the
 [-atoms-used atoms_used.txt](https://www.rbvi.ucsf.edu/Research/projects/minrms/docs/minrms.html#customize) and "-HS" arguments.
 *(You must include the "-HS" argument to inform minrms that the molecules
-being aligned do not contain any helix or sheet secondary structure).*
+being aligned do not contain any helix or sheet secondary structure.)*
 
 
 ## Warning
