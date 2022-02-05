@@ -8,26 +8,30 @@
 
 # binary files (but not their directories which have matching names)
 
-combine_mrc
-!combine_mrc/
+minrms
+!minrms/
 
-convert_to_float
-!convert_to_float/
+fssp2msf
+!fssp2msf/
 
-crop_mrc
-!crop_mrc/
+msf2sequence
+!msf2sequence/
 
-filter_mrc
-!filter_mrc/
+msf2stat3d
+!msf2stat3d/
 
-print_mrc_stats
-!print_mrc_stats/
+msf_compare
+!msf_compare/
 
-sum_voxels
-!sum_voxels/
+pdb2sequence
+!pdb2sequence/
 
-pval_mrc
-!pval_mrc/
+pdb_select
+!pdb_select/
+
+rotate_pdb
+!rotate_pdb/
+
 
 # Unignore all dirs
 # !*/   COMMENTING OUT

@@ -129,7 +129,7 @@ RMSD favors alignments with very few residues in common,
 even if the two proteins have nearly identical shape.
 *(This is because it's always possible to find an alignment with a lower RMSD
 by discarding the most distant pair of residues in an existing alignment.)*
-To get around this ambiguity,
+As a result of this ambiguity,
 MINRMS will generate alignments of every possible size,
 each of which is optimal in RMSD (for alignments of that size).
 It is the responsibility of the user to choose between these alignments.
