@@ -3,10 +3,11 @@ fssp2msf
 
 # THIS PROGRAM IS DEPRECIATED
 
-***As of 2022-2-02 The DALI server and the FSSP file format that it uses
-are no longer maintained or supported.
-There is no longer a need for this program.
-It will likely be removed in the future.
+***As of 2022-2-02 The
+[DALI server](https://web.archive.org/web/20090301064750/http://ekhidna.biocenter.helsinki.fi/dali_server/start)
+and the FSSP file format it uses have been depreciated.
+There is probably no longer a need for this program.
+This program may be removed in the future.
 -Andrew***
 
 
@@ -19,10 +20,11 @@ fssp2msf converts alignments between a pair of proteins in the
 FSSP format into an MSF file.
 The MSF file is saved as a file with the same name as the fssp_file,
 with an ".msf" extension appended at the end of the name of the file.
-- fssp_file is a file describing a structural alignment between several
-  molecules in FSSP format.  (This is the format used by the DALI
-  server.)  For more information, see: http://www2.ebi.ac.uk/dali/fssp
-  ***WARNING: This link no longer works as of 2022-2-02***
+- fssp_file is a file describing a structural alignment between
+  several molecules in FSSP format.  (This is the format used by the
+  [DALI server](https://web.archive.org/web/20090301064750/http://ekhidna.biocenter.helsinki.fi/dali_server/start).)
+  ***WARNING: This file format has been depreciated
+  and the link points to an archive.***
 - The MSF file format is explained
   [here.](http://rothlab.ucdavis.edu/genhelp/chapter_2_using_sequences.html#_Specifying_RSF_Files)
  *(MSF files can be converted to and from other
