@@ -1,4 +1,5 @@
 [![CircleCI](https://img.shields.io/circleci/build/github/RBVI/minrms/main)](https://circleci.com/gh/RBVI/minrms)
+[![CodeQL](https://github.com/RBVI/minrms/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/RBVI/minrms/actions/workflows/codeql-analysis.yml)
 [![C++11](https://img.shields.io/badge/C%2B%2B-11-blue.svg)](https://isocpp.org/std/the-standard)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/RBVI/minrms)]()
 [![Website](https://img.shields.io/website?down_color=orange&down_message=moltemplate.org%20offline&up_color=green&up_message=online&url=https%3A%2F%2Fwww.cgl.ucsf.edu%2FResearch%2Fminrms)](http://www.cgl.ucsf.edu/Research/minrms)
